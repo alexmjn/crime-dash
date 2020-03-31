@@ -7,20 +7,21 @@ from dash.dependencies import Input, Output
 
 # Imports from this application
 from app import app, server
-from pages import index, predictions, insights, process
+from pages import index, predictions, insights, process, crime
 
 # Navbar docs: https://dash-bootstrap-components.opensource.faculty.ai/l/components/navbar
 navbar = dbc.NavbarSimple(
-    brand='YOUR APP NAME',
-    brand_href='/', 
+    brand='Predicting Crime Clearance',
+    brand_href='/',
     children=[
-        dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Insights', href='/insights', className='nav-link')), 
-        dbc.NavItem(dcc.Link('Process', href='/process', className='nav-link')), 
+        dbc.NavItem(dcc.Link('Predicting Crime Clearance', href='/crime', classname='nav-link')),
+        dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')),
+        dbc.NavItem(dcc.Link('Insights', href='/insights', className='nav-link')),
+        dbc.NavItem(dcc.Link('Process', href='/process', className='nav-link')),
     ],
     sticky='top',
-    color='light', 
-    light=True, 
+    color='light',
+    light=True,
     dark=False
 )
 
@@ -35,12 +36,12 @@ footer = dbc.Container(
         dbc.Col(
             html.P(
                 [
-                    html.Span('Your Name', className='mr-2'), 
-                    html.A(html.I(className='fas fa-envelope-square mr-1'), href='mailto:<you>@<provider>.com'), 
-                    html.A(html.I(className='fab fa-github-square mr-1'), href='https://github.com/<you>/<repo>'), 
-                    html.A(html.I(className='fab fa-linkedin mr-1'), href='https://www.linkedin.com/in/<you>/'), 
-                    html.A(html.I(className='fab fa-twitter-square mr-1'), href='https://twitter.com/<you>'), 
-                ], 
+                    html.Span('Alex Jenkins-Neary', className='mr-2'),
+                    html.A(html.I(className='fas fa-envelope-square mr-1'), href='mailto:a.jenkneary@gmail.com'),
+                    html.A(html.I(className='fab fa-github-square mr-1'), href='https://github.com/alexmjn/crime-dash'),
+                    html.A(html.I(className='fab fa-linkedin mr-1'), href='https://www.linkedin.com/in/alexjenkinsneary/'),
+                    #html.A(html.I(className='fab fa-twitter-square mr-1'), href='https://twitter.com/<you>'),
+                ],
                 className='lead'
             )
         )
@@ -52,10 +53,10 @@ footer = dbc.Container(
 # dcc.Location: https://dash.plot.ly/dash-core-components/location
 # dbc.Container: https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False), 
-    navbar, 
-    dbc.Container(id='page-content', className='mt-4'), 
-    html.Hr(), 
+    dcc.Location(id='url', refresh=False),
+    navbar,
+    dbc.Container(id='page-content', className='mt-4'),
+    html.Hr(),
     footer
 ])
 
@@ -72,6 +73,8 @@ def display_page(pathname):
         return insights.layout
     elif pathname == '/process':
         return process.layout
+    elif pathname == '/crime':
+        return crime.layout
     else:
         return dcc.Markdown('## Page not found')
 

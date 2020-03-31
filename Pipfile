@@ -6,11 +6,23 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+category-encoders = "*"
+numpy = "*"
+pandas = "*"
+plotly = "*"
+seaborn = "*"
+scikit-learn = "*"
+wandb = "*"
+tensorflow = "*"
+eli5 = "*"
+xgboost = "*"
+python-dotenv = "*"
+matplotlib = "*"
+gunicorn = "*"
 dash = "*"
 dash-bootstrap-components = "*"
-gunicorn = "*"
-plotly = "*"
-pandas = "*"
+joblib = "*"
+dash-daq = "*"
 
 [requires]
 python_version = "3"
