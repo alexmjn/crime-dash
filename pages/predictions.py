@@ -40,47 +40,10 @@ column1 = dbc.Col(
             value = 'Y',
             className='mb-4',
         ),
-
-        dcc.Markdown('#### Time of Day'),
-        dcc.Dropdown(
-            id='Shift',
-            options = [
-                {'label': 'AM', 'value': 'AM'},
-                {'label': 'PM', 'value': 'PM'},
-            ],
-            value = 'AM',
-            className='mb-4',
-        ),
-
-        dcc.Markdown('#### Foraging'),
-        dcc.Dropdown(
-            id='Foraging',
-            options = [
-                {'label': 'True', 'value': 'True'},
-                {'label': 'False', 'value': 'False'},
-            ],
-            value = 'True',
-            className='mb-4',
-        ),
-
-             dcc.Markdown('#### Eating'),
-        dcc.Dropdown(
-            id='Eating',
-            options = [
-                {'label': 'True', 'value': 'True'},
-                {'label': 'False', 'value': 'False'},
-            ],
-            value = 'True',
-            className='mb-4',
-        ),
-
-
-
-
     ],
     md=4,
 )
-
+"""
 column2 = dbc.Col(
     [
         #dcc.Markdown('## .', className='mb-5'),
@@ -114,14 +77,14 @@ column2 = dbc.Col(
 
 
     ]
-)
+) """
 
-column3 = dbc.Col(
+column2 = dbc.Col(
     [
 
-        html.H2('Squirrel Behavior', className='mb-3'),
+        html.H2('Clearance Prediction', className='mb-3'),
         html.Div(id='prediction-content', className='lead'),
-        html.Div(id='prediction-image', className='lead'),
+ #       html.Div(id='prediction-image', className='lead'),
 
     #daq.Gauge(
     #d='my-daq-gauge',
@@ -136,27 +99,28 @@ column3 = dbc.Col(
     ]
 )
 
-layout = dbc.Row([column1, column2, column3])
+layout = dbc.Row([column1, column2])
 
 
 import pandas as pd
 
 @app.callback(
     Output('prediction-content', 'children'),
-    [Input('Shift', 'value'), Input('Foraging', 'bool'), Input('Longitude', 'value'), Input('Latitude', 'value'),
-    Input('Primary_Fur_Color', 'value'), Input('Eating', 'bool'), Input('Highlight_Fur_Color', 'value') ],
+    [Input('agency_name', 'value'), Input('firearm_ind', 'bool')],
 )
-def predict(Shift, Foraging, X, Y, Primary_Fur_Color, Eating, Highlight_Fur_Color):
+def predict(agency_name, firearm_ind):
     df = pd.DataFrame(
-        columns=['Shift', 'Foraging', 'Longitude', 'Latitude', 'Primary_Fur_Color', 'Eating', 'Highlight_Fur_Color'],
-        data=[[Shift, Foraging, X, Y, Primary_Fur_Color, Eating, Highlight_Fur_Color]]
+        columns=['agency_name', 'firearm_ind'],
+        data=[[agency_name, firearm_ind]]
     )
     y_pred = pipeline.predict(df)[0]
     if y_pred == True:
-        return f'Squirrel Approaches'
+        return f'This case was likely cleared!'
     else:
-        return f'Squirrel Runs Away'
+        return f'This case was likely unsolved.'
 
+"""
+This uses the pipeline to call back an image - stylization.
 @app.callback(
     Output('prediction-image', 'children'),
     [Input('Shift', 'value'), Input('Foraging', 'bool'), Input('Longitude', 'value'), Input('Latitude', 'value'),
@@ -172,7 +136,7 @@ def predict(Shift, Foraging, X, Y, Primary_Fur_Color, Eating, Highlight_Fur_Colo
     if y_pred == True:
         return html.Img(src='assets/squirrel_approach.png',className='img-fluid', style = {'height': '300px'})
     else:
-        return html.Img(src='assets/squirrel_runs.png',className='img-fluid', style = {'height': '300px'})
+        return html.Img(src='assets/squirrel_runs.png',className='img-fluid', style = {'height': '300px'}) """
 
 @app.callback(
     dash.dependencies.Output('slider-output-container1', 'children'),
