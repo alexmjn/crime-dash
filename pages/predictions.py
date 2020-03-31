@@ -138,7 +138,7 @@ def predict(Shift, Foraging, X, Y, Primary_Fur_Color, Eating, Highlight_Fur_Colo
     else:
         return html.Img(src='assets/squirrel_runs.png',className='img-fluid', style = {'height': '300px'}) """
 
-@app.callback(
+""" @app.callback(
     dash.dependencies.Output('slider-output-container1', 'children'),
     [dash.dependencies.Input('Longitude', 'value')])
 def update_output(value):
@@ -149,3 +149,4 @@ def update_output(value):
     [dash.dependencies.Input('Latitude', 'value')])
 def update_output(value):
     return 'You have entered "{}"'.format(value)
+ """
