@@ -5,9 +5,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.express as px
-from functions.load_data import load_data, create_binary_target, define_target
+from functions.load_data import load_data, create_binary_target
 from functions.load_data import extract_time_and_date, clean_age_category
-from functions.load_data import separate_black_hispanic, wrangle, wrangle_data
+from functions.load_data import separate_black_hispanic, wrangle
 from functions.load_data import generate_most_common
 # Imports from this application
 from app import app
@@ -28,10 +28,8 @@ column1 = dbc.Col(
 )
 
 # pass a data frame here -- how best way?
-train, val, test = load_data()
-train, val, test = define_target(train, val, test)
-train, val, test = wrangle_data(train, val, test)
-df = generate_most_common("agency_name", 8, train)
+train = wrangle()
+df = generate_most_common(train, "agency_name", 8)
 
 fig = px.bar(df, x="agency_name", y="cleared", color="firearm_ind",
            )

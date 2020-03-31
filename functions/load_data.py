@@ -12,7 +12,7 @@ def load_data():
     train, test = train_test_split(crime, test_size=.2, random_state=42)
     train, val = train_test_split(train, test_size=.2, random_state=42)
 
-    return train, val, test
+    return train
 
 def create_binary_target(df):
 
@@ -22,13 +22,6 @@ def create_binary_target(df):
     df = df.drop(["clearance_group"], axis=1)
 
     return df
-
-def define_target(train, val, test):
-    train = create_binary_target(train)
-    val = create_binary_target(val)
-    test = create_binary_target(test)
-
-    return train, val, test
 
 def extract_time_and_date(df):
 
@@ -66,21 +59,17 @@ def separate_black_hispanic(df):
 
     return df
 
-def wrangle(df):
+def wrangle():
 
-    df = df.copy()
+    df = load_data()
+    df = create_binary_target(df)
     df = extract_time_and_date(df)
     df = separate_black_hispanic(df)
     df = clean_age_category(df)
 
     return df
 
-def wrangle_data(train, val, test):
-    train = wrangle(train)
-    val = wrangle(val)
-    test = wrangle(test)
-
-def generate_most_common(feature, n, df):
+def generate_most_common(df, feature="agency_name", n=8):
     df_plot = df.copy()
     top_obs = df_plot[feature].value_counts()[:n].index
     df_plot.loc[~df_plot[feature].isin(top_obs), feature] = "Other"
