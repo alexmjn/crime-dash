@@ -28,6 +28,7 @@ column1 = dbc.Col(
 )
 
 # pass a data frame here -- how best way?
+# should definitely load pickled
 train = wrangle()
 df = generate_most_common(train, "agency_name", 8)
 
