@@ -4,11 +4,9 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import pandas as pd
 import plotly.express as px
-from functions.load_data import load_data, create_binary_target
-from functions.load_data import extract_time_and_date, clean_age_category
-from functions.load_data import separate_black_hispanic, wrangle
-from functions.load_data import generate_most_common
+
 # Imports from this application
 from app import app
 
@@ -27,13 +25,9 @@ column1 = dbc.Col(
     md=4,
 )
 
-# pass a data frame here -- how best way?
-# should definitely load pickled
-train = wrangle()
-df = generate_most_common(train, "agency_name", 8)
-
-fig = px.bar(df, x="agency_name", y="cleared", color="firearm_ind",
-           )
+df = pd.read_pickle("functions/data_file.bz2")
+fig = px.bar(df, x="agency_name", y="cleared", color="firearm_ind")
+# make bar and save?
 
 column2 = dbc.Col(
     [

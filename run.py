@@ -21,8 +21,7 @@ navbar = dbc.NavbarSimple(
     ],
     sticky='top',
     color='light',
-    light=True,
-    dark=False
+    dark=True
 )
 
 # Footer docs:
@@ -40,7 +39,6 @@ footer = dbc.Container(
                     html.A(html.I(className='fas fa-envelope-square mr-1'), href='mailto:a.jenkneary@gmail.com'),
                     html.A(html.I(className='fab fa-github-square mr-1'), href='https://github.com/alexmjn/crime-dash'),
                     html.A(html.I(className='fab fa-linkedin mr-1'), href='https://www.linkedin.com/in/alexjenkinsneary/'),
-                    #html.A(html.I(className='fab fa-twitter-square mr-1'), href='https://twitter.com/<you>'),
                 ],
                 className='lead'
             )
@@ -48,10 +46,7 @@ footer = dbc.Container(
     )
 )
 
-# Layout docs:
-# html.Div: https://dash.plot.ly/getting-started
-# dcc.Location: https://dash.plot.ly/dash-core-components/location
-# dbc.Container: https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
+
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     navbar,
