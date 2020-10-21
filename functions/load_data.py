@@ -75,3 +75,8 @@ def generate_most_common(df, feature="agency_name", n=8):
     df_plot.loc[~df_plot[feature].isin(top_obs), feature] = "Other"
 
     return df_plot
+
+if __name__ == "__main__":
+    train = wrangle()
+    df = generate_most_common(train, "agency_name", 8)
+    df.to_pickle("data_file.bz2")
